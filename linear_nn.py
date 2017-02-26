@@ -26,14 +26,27 @@ Predicted_y = _modelWeights*x_data + _modelBiases
 ## Calculate de square error between predicted and real "y" values
 Loss_error = tf.reduce_mean(tf.square(Predicted_y - y_data))
 
-## update variables using gradient descent and minimize Loss_error
+## Training: update variables using gradient descent and minimize Loss_error
 optimizer = tf.train.GradientDescentOptimizer(0.5)
-train = optimizer.minimize(loss)
+trainModel = optimizer.minimize(loss)
 
 ## Run the model and init
 # tf.initialize_all_variables(), no longer available after 2017-03-02. 
 init = tf.global_variables_initializer()
 sess = tf.Session()
+
+sess.run(init)
+
+# Increasing Range will increase the accuracy of the model
+for step in range(101):
+    sess.run(trainModel)
+    if step % 15 == 0: # Batch: 15, plot results every 15 observations
+        print("Observation:", step, 
+              "Model Weights", sess.run(Weights),
+              "Model Biases:", sess.run(biases),
+              "Real Weights:", _realWeights, 
+              "Real Biases:", _realWeights)
+
 
 
 
