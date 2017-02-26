@@ -20,6 +20,20 @@ y_data = _realWeights*x_data + _realBiases
 _modelWeights = tf.Variable(tf.random_uniform([1], -1.0, 1.0))
 _modelBiases = tf.Variable(tf.zeros([1]))
 
+## Model
 Predicted_y = _modelWeights*x_data + _modelBiases
+
+## Calculate de square error between predicted and real "y" values
+Loss_error = tf.reduce_mean(tf.square(Predicted_y - y_data))
+
+## update variables using gradient descent and minimize Loss_error
+optimizer = tf.train.GradientDescentOptimizer(0.5)
+train = optimizer.minimize(loss)
+
+## Run the model and init
+# tf.initialize_all_variables(), no longer available after 2017-03-02. 
+init = tf.global_variables_initializer()
+sess = tf.Session()
+
 
 
