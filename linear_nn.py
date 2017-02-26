@@ -28,7 +28,7 @@ Loss_error = tf.reduce_mean(tf.square(Predicted_y - y_data))
 
 ## Training: update variables using gradient descent and minimize Loss_error
 optimizer = tf.train.GradientDescentOptimizer(0.5)
-trainModel = optimizer.minimize(loss)
+trainModel = optimizer.minimize(Loss_error)
 
 ## Run the model and init
 # tf.initialize_all_variables(), no longer available after 2017-03-02. 
@@ -38,15 +38,16 @@ sess = tf.Session()
 sess.run(init)
 
 # Increasing Range will increase the accuracy of the model
-for step in range(101):
+for step in range(116):
     sess.run(trainModel)
     if step % 15 == 0: # Batch: 15, plot results every 15 observations
         print("Observation:", step, 
-              "Model Weights", sess.run(Weights),
-              "Model Biases:", sess.run(biases),
+              "Model Weights", sess.run(_modelWeights),
+              "Model Biases:", sess.run(_modelBiases),
               "Real Weights:", _realWeights, 
-              "Real Biases:", _realWeights)
+              "Real Biases:", _realBiases)
 
+## Both _modelWeights and _modelBiases approximate to real values in every iteration :D It works!
 
 
 
