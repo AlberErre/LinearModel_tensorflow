@@ -68,8 +68,8 @@ plt.scatter(x_data,y_data_HIGH_noise)
 plt.show()
 
 ####
-Loss_error_noisy_HIGH = tf.reduce_mean(tf.square(Predicted_y - y_data_noisy)) 
-    # We can use "y_data_HIGH_noise" instead of "y_data_noisy"
+Loss_error_noisy_HIGH = tf.reduce_mean(tf.square(Predicted_y - y_data_HIGH_noise)) 
+    # We can use "y_data_noisy" instead of "y_data_HIGH_noise"
     # Depends of how much noise you want :D
 optimizer = tf.train.GradientDescentOptimizer(0.5)
 			## We also can use "AdamOptimizer"
